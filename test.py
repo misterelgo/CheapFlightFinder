@@ -17,8 +17,14 @@ data = {
 	"lowestPrice": city_info[0]["lowestPrice"]
   }
 }
-sheety_response_put = requests.put(url=f"{sheety_API_URL}/{city_info[0]['id']}", json=data)
-print(city_info[0])
-pprint(sheety_response_put.json())
+api_endpoint = "https://api.tequila.kiwi.com"
+api_KEY = "Cz5p2UwowjDvS0yK_m4Y1mX1AUXytyZ2"
 
-
+location_endpoint = f"{api_endpoint}/locations/query"
+headers = {"apikey": api_KEY}
+query = {"term": "Berlin", "location_types": "city"}
+response = requests.get(url=location_endpoint, headers=headers, params=query)
+response.raise_for_status()
+results = response.json()["locations"]
+code = results[0]["code"]
+print(code)
