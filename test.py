@@ -23,8 +23,9 @@ api_KEY = "Cz5p2UwowjDvS0yK_m4Y1mX1AUXytyZ2"
 location_endpoint = f"{api_endpoint}/locations/query"
 headers = {"apikey": api_KEY}
 query = {"term": "Berlin", "location_types": "city"}
-response = requests.get(url=location_endpoint, headers=headers, params=query)
-response.raise_for_status()
-results = response.json()["locations"]
-code = results[0]["code"]
-print(code)
+# response = requests.get(url=location_endpoint, headers=headers, params=query)
+# response.raise_for_status()
+# results = response.json()["locations"]
+# code = results[0]["code"]
+
+

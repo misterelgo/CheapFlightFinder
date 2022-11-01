@@ -23,5 +23,5 @@ class DataManager:
             }
         }
         response = requests.put(url=self.sheety_IATA_API_URL, json=self.data)
-        print("response.status_code =", response.status_code)
+        #print("response.status_code =", response.status_code)
         return response.json()
