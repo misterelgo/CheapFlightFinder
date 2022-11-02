@@ -3,6 +3,7 @@ from flight_data import FlightData
 class DataManager:
     #This class is responsible for talking to the Google Sheet.
     def __init__(self):
+        self.destination_data = {}
         self.projectName = "flightDeals"
         self.sheetName = "prices"
         self.sheety_API_URL = f"https://api.sheety.co/10fce03195300cfd5c84ea323144da6f/{self.projectName}/{self.sheetName}"
@@ -11,7 +12,8 @@ class DataManager:
         sheety_response = requests.get(url=self.sheety_API_URL)
         sheety_response.raise_for_status()
         sheety_result = sheety_response.json()
-        return sheety_result
+        self.destination_data = sheety_result["prices"]
+        return self.destination_data
 
     def put_IATA_code(self, city_info,  IATA_code):
         self.sheety_IATA_API_URL = f"https://api.sheety.co/10fce03195300cfd5c84ea323144da6f/{self.projectName}/{self.sheetName}/{city_info['id']}"
