@@ -2,14 +2,15 @@
 from data_manager import DataManager
 from flight_data import FlightData
 from flight_search import FlightSearch
-from pprint import pprint
 from datetime import datetime, timedelta
+from notification_manager import NotificationManager
 
 
 
 my_data_manager = DataManager()
 sheety_data = my_data_manager.get_data()
 my_flight_search = FlightSearch()
+my_notification_manager = NotificationManager()
 
 city_info = sheety_data["prices"]
 for city in range (len(city_info)):
@@ -28,3 +29,8 @@ for destination in sheety_data:
         from_time=tomorrow,
         to_time=six_month_from_today
     )
+
+if flight.price < destination["lowestPrice"]:
+        my_notification_manager.send_sms(
+            message=f"Low price alert! Only £{flight.price} to fly from {flight.origin_city}-{flight.origin_airport} to {flight.destination_city}-{flight.destination_airport}, from {flight.out_date} to {flight.return_date}."
+        )
